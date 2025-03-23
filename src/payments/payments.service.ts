@@ -18,7 +18,7 @@ export class PaymentsService {
         product_data: {
           name: item.name,
         },
-        unit_amount: Math.round(item.price * 100), // 20 dólares
+        unit_amount: Math.round(item.price * 100),
       },
       quantity: item.quantity,
     }));
@@ -31,8 +31,8 @@ export class PaymentsService {
       },
       line_items,
       mode: 'payment',
-      success_url: 'http://localhost:3003/payments/success',
-      cancel_url: 'http://localhost:3003/payments/cancel',
+      success_url: envs.stripe.checkout.successUrl,
+      cancel_url: envs.stripe.checkout.cancelUrl,
     });
 
     return session;

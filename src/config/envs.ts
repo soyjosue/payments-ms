@@ -5,12 +5,16 @@ interface EnvVars {
   PORT: number;
   STRIPE_SECRET: string;
   STRIPE_WEBHOOK_SIGNING_SECRET: string;
+  STRIPE_CHECKOUT_SUCCESS_URL: string;
+  STRIPE_CHECKOUT_CANCEL_URL: string;
 }
 
 const envSchema = joi.object<EnvVars>({
   PORT: joi.number().required(),
   STRIPE_SECRET: joi.string().required(),
   STRIPE_WEBHOOK_SIGNING_SECRET: joi.string().required(),
+  STRIPE_CHECKOUT_SUCCESS_URL: joi.string().required(),
+  STRIPE_CHECKOUT_CANCEL_URL: joi.string().required(),
 });
 
 function validateEnv<T>(
@@ -36,6 +40,10 @@ export const envs = {
     secret: validatedEnv.STRIPE_SECRET,
     webhook: {
       signingSecret: validatedEnv.STRIPE_WEBHOOK_SIGNING_SECRET,
+    },
+    checkout: {
+      successUrl: validatedEnv.STRIPE_CHECKOUT_SUCCESS_URL,
+      cancelUrl: validatedEnv.STRIPE_CHECKOUT_CANCEL_URL,
     },
   },
 };
